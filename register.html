@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content="width=device-width, initial-scale=1">
+        <style>
+            *{
+                margin: 0px;
+            }
+            
+            body{
+                font-family: Arial, Helvetica, sans-serif ;
+                
+
+            }
+            form{
+                margin: 10px;
+                text-align: center;
+                border: 1px solid rgb(240, 239, 239);
+                padding: 10px;
+                border-radius: 10px;
+                box-shadow: 2px 2px rgb(247, 247, 247);
+            }
+
+           button{
+                margin: 10px;
+                text-align: center;
+                border: 1px solid rgb(216, 184, 184);
+                padding: 10px;
+                background-image: radial-gradient(rgb(155, 94, 94), rgb(158, 97, 97), rgb(161, 100, 100));
+                border-radius: 10px;
+                color:rgb(249, 238, 238);
+            }
+
+            input{
+                border-radius: 5px;
+                border: 1px solid grey;
+            }
+
+            #dot1{
+                border-radius: 50%;
+                height: 20px;
+                width: 20px;
+                background-color: rgb(252, 133, 133);
+                display: inline-block;
+            }
+
+            #dot2{
+                border-radius: 50%;
+                height: 20px;
+                width: 20px;
+                background-color: rgb(121, 121, 254);
+                display: inline-block;
+            }
+
+            #dot3{
+                border-radius: 50%;
+                height: 20px;
+                width: 20px;
+                background-color: rgb(249, 249, 121);
+                display: inline-block;
+            }
+
+            /* Style for the navigation bar */
+            nav{
+                display: flex;
+                flex-wrap: wrap;
+                background-color: rgb(145, 88, 88);
+                padding-top: 8px;
+                padding-bottom: 8px;
+                
+            }
+
+            nav div{
+                color: rgb(247, 242, 242);
+                width: 15%;
+            }
+
+            nav .long{
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 25px;
+                width: 50%;
+
+            }
+
+            a{
+                text-decoration: none;
+                color: rgb(247, 242, 242);
+            }
+            /*End of styling for nav bar */
+            @media (min-width: 1040px){
+                form{
+                    width: 50%;
+                }
+            }
+
+            
+
+
+        </style>
+
+        <title>Detail Page</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                form = document.querySelector('form')
+                form.onsubmit = function(){
+                    //On submit of form, do form validation
+                    anyEmpty = 0
+                    document.querySelectorAll('input').forEach(function(input){
+                        inputLnth = input.value.length
+                        if(inputLnth == 0){
+                            anyEmpty += 1
+                        }
+                        else if((inputLnth > 0)){
+                            anyEmpty += 0;
+                        }
+                    })
+                    if(anyEmpty > 0){
+                        alert('one or more input fields left blank');
+                        return false;
+                    }
+                    else if(anyEmpty == 0){
+                        //If form is valid, take user to home page
+
+                        //Store details about user
+                        name = document.querySelector('#name').value
+                        phone = document.querySelector('#phone').value
+                        mail = document.querySelector('#email').value
+
+
+                        localStorage.setItem('chris_name', name);
+                        localStorage.setItem('chris_phone', phone);
+                        localStorage.setItem('chris_email', mail);
+
+
+                        //Take user to home page
+                        window.location.href = "home.html";
+                        
+                        return false;
+                        
+
+                    }
+                }
+            })
+        </script>
+    </head>
+
+    <body>
+        <!--Navigation bar-->
+        <nav>
+            <div class='long'><strong><em>Kris Jim</em></strong></div>
+            <div id='navHome'><a href='home.html'>Home</a></div>
+            <div id='navAbout'><a href='about.html'>About</a></div>
+            <div id='navContact'><a href='register.html'>Contact</a></div>
+
+        </nav>
+
+
+        <form>
+            <p><span id='dot1'></span> <span id='dot2'></span> <span id='dot3'></span></p>
+            <br>
+            <p>Name: <input id='name'></p><br>
+            <p>Phone Number: <input id='phone' type='number'></p><br>
+            <p>Email: <input type='email' id='email'></p><br>
+            <p><button>Know me</button></p><br>
+
+        </form>
+    </body>
+</html>

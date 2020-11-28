@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <style>
+            *{
+                margin: 0px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            
+            /* Style for the navigation bar */
+            nav{
+                display: flex;
+                flex-wrap: wrap;
+                background-color: rgb(145, 88, 88);
+                padding-top: 8px;
+                padding-bottom: 8px;
+                margin-bottom: 20px;
+                
+            }
+
+            nav div{
+                color: rgb(247, 242, 242);
+                width: 15%;
+            }
+
+            nav .long{
+                font-family: 'Times New Roman', Times, serif;
+                font-size: 25px;
+                width: 50%;
+
+            }
+
+            a{
+                text-decoration: none;
+                color: rgb(247, 242, 242);
+            }
+            /*End of styling for nav bar */
+
+            #aboutChris{
+                display: flex;
+                flex-wrap: wrap;
+                
+            }
+
+            #aboutChris img{
+                width: 40%;
+                border-radius: 10px;
+            }
+            #aboutChris h3{
+                color: rgb(165, 125, 49);
+            }
+            #aboutChris div{
+                padding: 12px;
+                width: 50%;
+                border: 1px solid rgb(218, 218, 218);
+                border-radius: 5px;
+                margin: 10px;
+
+                
+            }
+            button{
+                background-color: navy;
+                color: aliceblue;
+                padding: 2px;
+                border-radius: 2px;
+
+
+            }
+
+            /* For the three circle */
+            #dot1, #dot2, #dot3{
+                border-radius: 50%;
+                height: 20px;
+                width: 20px;
+                display: inline-block;
+                
+            }
+            
+
+            #dot1{
+                background-color: rgb(252, 133, 133);
+            }
+
+            #dot2{
+                background-color: rgb(121, 121, 254);
+            }
+
+            #dot3{
+                background-color: rgb(249, 249, 121);
+            }
+            #contacts a{
+                background-color: rgb(1, 1, 169);
+                padding: 3px;
+                border-radius: 3px;
+            }
+            
+
+            @media (max-width: 800px){
+                #aboutChris img{
+                width: 99%;
+                display: block;
+                margin: auto;
+                
+            }
+           
+            #aboutChris div{
+                padding: 5px;
+                margin: 3px;
+                width: 99%;
+            }
+               
+            }
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                if(localStorage.getItem('setChrisHeader')){
+                    setChrisHeader = localStorage.getItem('setChrisHeader')
+                    setChrisDetails = localStorage.getItem('setChrisDetails')
+
+                    document.querySelector('#editHead').innerHTML = setChrisHeader 
+                    document.querySelector('#editAbout').innerHTML = setChrisDetails
+
+                }
+                 
+                if(localStorage.getItem('chris_name')){
+                    name = localStorage.getItem('chris_name')
+                    phone = localStorage.getItem('chris_phone')
+                    if(name=='chris' && phone=='07069736780'){
+                        document.querySelector('#chrisOnly').style.display = 'block';
+                        form = document.querySelector('form')
+                        form.onsubmit =  function(){
+                           
+                            header = document.querySelector('#chris_header').value
+                            details = document.querySelector('#chris_details').value
+                            
+                            //Set local storage to keep data
+                            localStorage.setItem('setChrisHeader', header)
+                            localStorage.setItem('setChrisDetails', details)
+
+                            document.querySelector('#editHead').innerHTML = header
+                            document.querySelector('#editAbout').innerHTML = details
+
+
+
+                            return false;
+                            
+                        }
+                      
+
+                        
+                    }
+                    else{
+                        document.querySelector('#chrisOnly').style.display = 'none';
+                    }
+                }
+                else{
+                    body = document.querySelector('body')
+                    body.innerHTML = ''
+                    alert('You are not logged in properly, click okay to be redirected to home page')
+                    window.location.href = 'register.html'
+                }
+            })
+        </script>
+    <title>Home</title>
+    </head>
+    
+    <body>
+        <!--Navigation bar-->
+        <nav>
+            <div class='long'><em>Kris Jim</em></div>
+            <div id='navHome'><a href='home.html'>Home</a></div>
+            <div id='navAbout'><a href='about.html'>About</a></div>
+            <div id='navContact'><a href='register.html'>Contact</a></div>
+
+        </nav>
+        
+
+
+        <div id='aboutChris'>
+            
+            <img src='https://scontent-los2-1.xx.fbcdn.net/v/t1.0-9/76895538_2982243845138178_5392583009247428608_o.jpg?_nc_cat=111&ccb=2&_nc_sid=174925&_nc_ohc=X2x-_KDVEPUAX8xx1ut&_nc_ht=scontent-los2-1.xx&oh=92a26fb7a5b8ca60b73849f62201828a&oe=5FE596DD'>
+            <br>
+            <div>
+                <p style='text-align: center;'><span id='dot1'></span> <span id='dot2'></span> <span id='dot3'></span></p>
+                <br>
+                <h3 id='editHead'>About Kris</h3>
+                <br>
+                <p id='editAbout'>
+                    Welcome to my page. I am a web developer and I focus on helping individuals create a real
+                     and lasting knowledge in the world of web development.
+                </p>
+                <br>
+                <p id='contacts' style='text-align: center;'>&nbsp;<span><a href='mailto:example@mail.com'>Email me</a></span>&nbsp;<span><a href='https://www.facebook.com/elcrizzy'>Facebook</a></span>&nbsp;</p>
+            </div>
+            <div id='chrisOnly'>
+                <form>
+                    <h3>This form is visible only to Chris</h3>
+                <p>Header: <input id='chris_header'></p>
+                <br>
+                <p>About Chris: <textarea id='chris_details'></textarea></p>
+                <button>Edit about Chris</button>
+            </form>
+            </div>
+        </div>
+        
+        
+    </body>
+</html>
